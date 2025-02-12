@@ -6,4 +6,4 @@
 	url = https://github.com/Sewer56/CriFs.V2.Hook.ReloadedII
 [submodule "Interfaces/BGME"]
 	path = Interfaces/BGME
-	url = https://github.com/T-PoseRatkechi/BGME.git
+	url = https://github.com/RyoTune/BGME
