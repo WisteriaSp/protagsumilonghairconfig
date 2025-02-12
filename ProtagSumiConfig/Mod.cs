@@ -10,7 +10,7 @@ using Reloaded.Mod.Interfaces.Internal;
 using BF.File.Emulator;
 using BF.File.Emulator.Interfaces;
 
-namespace NaoSmiley
+namespace ProtagSumiConfig
 {
 	/// <summary>
 	/// Your mod logic goes here.

@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ReloadedLinkRoots Include="NaoSmiley" />
+    <ReloadedLinkRoots Include="ProtagSumiConfig" />
     <!-- Add assemblies to be trimmed. You might need to add their dependencies too!  -->
     <!-- <ReloadedLinkAssemblies Include="Reloaded.Memory" /> -->
   </ItemGroup>
