@@ -193,12 +193,13 @@
   "ModDependencies": [
     "P5R.CostumeFramework",
     "p5rpc.modloader",
-    "Ryo.Reloaded"
+    "Ryo.Reloaded",
+    "reloaded.sharedlib.hooks"
   ],
   "OptionalDependencies": [],
   "SupportedAppId": [
-    "p5r.exe",
     "p5r.exe"
   ],
-  "ProjectUrl": "https://gamebanana.com/wips/75092"
+  "ProjectUrl": "https://gamebanana.com/wips/75092",
+  "CreatorUrl": ""
 }

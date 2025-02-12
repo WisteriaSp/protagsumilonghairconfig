@@ -38,8 +38,8 @@ namespace ProtagSumiConfig.Configuration
         [Category("Bustup")]
         [DisplayName("L7M3's Bustups")]
         [Description("Enable this to use L7M3's custom drawn bustups.")]
-        [DefaultValue(false)]
-        public bool Bustup1 { get; set; } = false;
+        [DefaultValue(true)]
+        public bool Bustup1 { get; set; } = true;
     }
 
     /// <summary>
