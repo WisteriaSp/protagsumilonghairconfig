@@ -29,11 +29,17 @@ namespace NaoSmiley.Configuration
             The `DefaultValue` attribute is used as part of the `Reset` button in Reloaded-Launcher.
         */
 
-        [Category("Test")]
-        [DisplayName("Test")]
-		[Description("Bool example")]
+        [Category("Events")]
+        [DisplayName("Event Edits")]
+		[Description("Disable this if you're having issues with other mods that edit events.")]
 		[DefaultValue(true)]
-		public bool Test1 { get; set; } = true; // bool used in Mod.CS, not the folder name, but the bool name
+		public bool EventEdits1 { get; set; } = true; // bool used in Mod.CS, not the folder name, but the bool name
+
+        [Category("Bustup")]
+        [DisplayName("L7M3's Bustups")]
+        [Description("Enable this to use L7M3's custom drawn bustups.")]
+        [DefaultValue(false)]
+        public bool Bustup1 { get; set; } = false;
     }
 
     /// <summary>

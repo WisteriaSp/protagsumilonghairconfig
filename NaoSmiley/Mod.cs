@@ -7,8 +7,6 @@ using CriFs.V2.Hook.Interfaces;
 using PAK.Stream.Emulator;
 using PAK.Stream.Emulator.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
-using BGME.Framework;
-using BGME.Framework.Interfaces;
 using BF.File.Emulator;
 using BF.File.Emulator.Interfaces;
 
@@ -59,19 +57,19 @@ namespace NaoSmiley
 			_configuration = context.Configuration;
 			_modConfig = context.ModConfig;
 
-			var modDir = _modLoader.GetDirectoryForModId(_modConfig.ModId); // modDir variable for file emulation
+            var modDir = _modLoader.GetDirectoryForModId(_modConfig.ModId); // modDir variable for file emulation
 
-			// For more information about this template, please see
-			// https://reloaded-project.github.io/Reloaded-II/ModTemplate/
+            // For more information about this template, please see
+            // https://reloaded-project.github.io/Reloaded-II/ModTemplate/
 
-			// If you want to implement e.g. unload support in your mod,
-			// and some other neat features, override the methods in ModBase.
+            // If you want to implement e.g. unload support in your mod,
+            // and some other neat features, override the methods in ModBase.
 
-			// TODO: Implement some mod logic
+            // TODO: Implement some mod logic
 
-			// Define controllers and other variables, set warning messages
-	
-			var criFsController = _modLoader.GetController<ICriFsRedirectorApi>();
+            // Define controllers and other variables, set warning messages
+
+            var criFsController = _modLoader.GetController<ICriFsRedirectorApi>();
 			if (criFsController == null || !criFsController.TryGetTarget(out var criFsApi))
 			{
 				_logger.WriteLine($"Something in CriFS shit its pants! Normal files will not load properly!", System.Drawing.Color.Red);
@@ -92,38 +90,26 @@ namespace NaoSmiley
                 return;
             }
 
-            var BGMEController = _modLoader.GetController<IBgmeApi>();
+/*            var BGMEController = _modLoader.GetController<IBgmeApi>();
 			if (BGMEController == null || !BGMEController.TryGetTarget(out var _BGME))
 			{
 				_logger.WriteLine($"Something in BGME shit its pants! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
 				return;
             }
 
-
+*/
             // Set configuration options - obviously you don't need all of these, pick and choose what you need!
 
             // criFS
-            if (_configuration.Test1)
+            if (_configuration.EventEdits1)
 			{
-				criFsApi.AddProbingPath("Test"); // folder path. place a subfolder inside and then start your file path. for example: "(mod folder)\Test\(any name)\..."
+				criFsApi.AddProbingPath("OptionalModFiles\\Events"); // folder path. place a subfolder inside and then start your file path. for example: "(mod folder)\Test\(any name)\..."
 			}
 
-            // PAK Emulator
-            if (_configuration.Test1)
-			{
-				_PakEmulator.AddDirectory(Path.Combine(modDir, "Test")); // folder path. immediately start your file path inside this folder. for example: "(mod folder)\Test\..."
-            }
-
-            // BF Emulator
-            if (_configuration.Test1)
+            // criFS
+            if (_configuration.Bustup1)
             {
-                _BfEmulator.AddDirectory(Path.Combine(modDir, "Test")); // folder path. immediately start your file path inside this folder. for example: "(mod folder)\Test\..."
-            }
-
-            // BGME
-            if (_configuration.Test1)
-            {
-				_BGME.AddFolder(Path.Combine(modDir, "Test")); // folder path. immediately start your file path inside this folder. for example: "(mod folder)\Test\..."
+                criFsApi.AddProbingPath("OptionalModFiles\\Bustup\\L7M3"); // folder path. place a subfolder inside and then start your file path. for example: "(mod folder)\Test\(any name)\..."
             }
         }
 	
