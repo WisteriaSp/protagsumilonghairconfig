@@ -11,8 +11,8 @@
   "ModNativeDll32": "",
   "ModNativeDll64": "",
   "Tags": [],
-  "CanUnload": null,
-  "HasExports": null,
+  "CanUnload": false,
+  "HasExports": false,
   "IsLibrary": false,
   "ReleaseMetadataFileName": "p5rpc.kasumiasprotag.ReleaseMetadata.json",
   "PluginData": {
@@ -193,8 +193,9 @@
   "ModDependencies": [
     "P5R.CostumeFramework",
     "p5rpc.modloader",
+    "reloaded.sharedlib.hooks",
     "Ryo.Reloaded",
-    "reloaded.sharedlib.hooks"
+    "crifs.v2.hook"
   ],
   "OptionalDependencies": [],
   "SupportedAppId": [

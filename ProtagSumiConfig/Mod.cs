@@ -4,11 +4,7 @@ using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
 using CriFs.V2.Hook;
 using CriFs.V2.Hook.Interfaces;
-using PAK.Stream.Emulator;
-using PAK.Stream.Emulator.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
-using BF.File.Emulator;
-using BF.File.Emulator.Interfaces;
 
 namespace ProtagSumiConfig
 {
@@ -76,7 +72,7 @@ namespace ProtagSumiConfig
 				return;
             }
 
-            var PakEmulatorController = _modLoader.GetController<IPakEmulator>();
+/*            var PakEmulatorController = _modLoader.GetController<IPakEmulator>();
             if (PakEmulatorController == null || !PakEmulatorController.TryGetTarget(out var _PakEmulator))
             {
                 _logger.WriteLine($"Something in PAK Emulator shit its pants! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
@@ -90,7 +86,7 @@ namespace ProtagSumiConfig
                 return;
             }
 
-/*            var BGMEController = _modLoader.GetController<IBgmeApi>();
+            var BGMEController = _modLoader.GetController<IBgmeApi>();
 			if (BGMEController == null || !BGMEController.TryGetTarget(out var _BGME))
 			{
 				_logger.WriteLine($"Something in BGME shit its pants! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
