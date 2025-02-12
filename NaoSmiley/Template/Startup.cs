@@ -3,13 +3,13 @@
  * to make it easier to upgrade to newer versions of the template.
 */
 
-using NaoSmiley.Configuration;
-using NaoSmiley.Template.Configuration;
+using ProtagSumiConfig.Configuration;
+using ProtagSumiConfig.Template.Configuration;
 using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
 
-namespace NaoSmiley.Template
+namespace ProtagSumiConfig.Template
 {
 	public class Startup : IMod
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace NaoSmiley.Template.Configuration
+namespace ProtagSumiConfig.Template.Configuration
 {
 	public class Utilities
 	{

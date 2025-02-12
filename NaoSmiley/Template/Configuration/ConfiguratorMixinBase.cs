@@ -1,7 +1,7 @@
-﻿using NaoSmiley.Configuration;
+﻿using ProtagSumiConfig.Configuration;
 using Reloaded.Mod.Interfaces;
 
-namespace NaoSmiley.Template.Configuration
+namespace ProtagSumiConfig.Template.Configuration
 {
 	/// <summary>
 	/// Creates the various different configurations used by the mod.

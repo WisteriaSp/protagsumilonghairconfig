@@ -1,7 +1,7 @@
-﻿using NaoSmiley.Configuration;
+﻿using ProtagSumiConfig.Configuration;
 using Reloaded.Mod.Interfaces;
 
-namespace NaoSmiley.Template.Configuration
+namespace ProtagSumiConfig.Template.Configuration
 {
 	public class Configurator : IConfiguratorV3
 	{

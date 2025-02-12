@@ -1,11 +1,11 @@
-﻿using NaoSmiley.Template.Configuration;
+﻿using ProtagSumiConfig.Template.Configuration;
 using Reloaded.Mod.Interfaces.Structs;
 using System.ComponentModel;
 using CriFs.V2.Hook;
 using CriFs.V2.Hook.Interfaces;
 using System.Reflection;
 
-namespace NaoSmiley.Configuration
+namespace ProtagSumiConfig.Configuration
 {
 	public class Config : Configurable<Config>
 	{

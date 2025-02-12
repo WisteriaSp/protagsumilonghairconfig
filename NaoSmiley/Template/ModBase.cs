@@ -1,6 +1,6 @@
-﻿using NaoSmiley.Configuration;
+﻿using ProtagSumiConfig.Configuration;
 
-namespace NaoSmiley.Template
+namespace ProtagSumiConfig.Template
 {
 	/// <summary>
 	/// Base class for implementing mod functionality.

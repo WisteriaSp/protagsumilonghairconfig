@@ -1,5 +1,5 @@
-﻿using NaoSmiley.Configuration;
-using NaoSmiley.Template;
+﻿using ProtagSumiConfig.Configuration;
+using ProtagSumiConfig.Template;
 using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
 using CriFs.V2.Hook;
