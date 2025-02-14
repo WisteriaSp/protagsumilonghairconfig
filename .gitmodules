@@ -7,3 +7,6 @@
 [submodule "Interfaces/BGME"]
 	path = Interfaces/BGME
 	url = https://github.com/RyoTune/BGME
+[submodule "Interfaces/P5R.CostumeFramework"]
+	path = Interfaces/P5R.CostumeFramework
+	url = https://github.com/T-PoseRatkechi/P5R.CostumeFramework

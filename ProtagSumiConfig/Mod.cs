@@ -5,53 +5,54 @@ using Reloaded.Mod.Interfaces;
 using CriFs.V2.Hook;
 using CriFs.V2.Hook.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
+using P5R.CostumeFramework;
 
 namespace ProtagSumiConfig
 {
-	/// <summary>
-	/// Your mod logic goes here.
-	/// </summary>
-	public class Mod : ModBase // <= Do not Remove.
-	{
-		/// <summary>
-		/// Provides access to the mod loader API.
-		/// </summary>
-		private readonly IModLoader _modLoader;
-	
-		/// <summary>
-		/// Provides access to the Reloaded.Hooks API.
-		/// </summary>
-		/// <remarks>This is null if you remove dependency on Reloaded.SharedLib.Hooks in your mod.</remarks>
-		private readonly IReloadedHooks? _hooks;
-	
-		/// <summary>
-		/// Provides access to the Reloaded logger.
-		/// </summary>
-		private readonly ILogger _logger;
-	
-		/// <summary>
-		/// Entry point into the mod, instance that created this class.
-		/// </summary>
-		private readonly IMod _owner;
-	
-		/// <summary>
-		/// Provides access to this mod's configuration.
-		/// </summary>
-		private Config _configuration;
-	
-		/// <summary>
-		/// The configuration of the currently executing mod.
-		/// </summary>
-		private readonly IModConfig _modConfig;
-	
-		public Mod(ModContext context)
-		{
-			_modLoader = context.ModLoader;
-			_hooks = context.Hooks;
-			_logger = context.Logger;
-			_owner = context.Owner;
-			_configuration = context.Configuration;
-			_modConfig = context.ModConfig;
+    /// <summary>
+    /// Your mod logic goes here.
+    /// </summary>
+    public class Mod : ModBase // <= Do not Remove.
+    {
+        /// <summary>
+        /// Provides access to the mod loader API.
+        /// </summary>
+        private readonly IModLoader _modLoader;
+    
+        /// <summary>
+        /// Provides access to the Reloaded.Hooks API.
+        /// </summary>
+        /// <remarks>This is null if you remove dependency on Reloaded.SharedLib.Hooks in your mod.</remarks>
+        private readonly IReloadedHooks? _hooks;
+    
+        /// <summary>
+        /// Provides access to the Reloaded logger.
+        /// </summary>
+        private readonly ILogger _logger;
+    
+        /// <summary>
+        /// Entry point into the mod, instance that created this class.
+        /// </summary>
+        private readonly IMod _owner;
+    
+        /// <summary>
+        /// Provides access to this mod's configuration.
+        /// </summary>
+        private Config _configuration;
+    
+        /// <summary>
+        /// The configuration of the currently executing mod.
+        /// </summary>
+        private readonly IModConfig _modConfig;
+    
+        public Mod(ModContext context)
+        {
+            _modLoader = context.ModLoader;
+            _hooks = context.Hooks;
+            _logger = context.Logger;
+            _owner = context.Owner;
+            _configuration = context.Configuration;
+            _modConfig = context.ModConfig;
 
             var modDir = _modLoader.GetDirectoryForModId(_modConfig.ModId); // modDir variable for file emulation
 
@@ -66,10 +67,10 @@ namespace ProtagSumiConfig
             // Define controllers and other variables, set warning messages
 
             var criFsController = _modLoader.GetController<ICriFsRedirectorApi>();
-			if (criFsController == null || !criFsController.TryGetTarget(out var criFsApi))
-			{
-				_logger.WriteLine($"Something in CriFS shit its pants! Normal files will not load properly!", System.Drawing.Color.Red);
-				return;
+            if (criFsController == null || !criFsController.TryGetTarget(out var criFsApi))
+            {
+                _logger.WriteLine($"Something in CriFS broke! Normal files will not load properly!", System.Drawing.Color.Red);
+                return;
             }
 
 /*            var PakEmulatorController = _modLoader.GetController<IPakEmulator>();
@@ -87,10 +88,10 @@ namespace ProtagSumiConfig
             }
 
             var BGMEController = _modLoader.GetController<IBgmeApi>();
-			if (BGMEController == null || !BGMEController.TryGetTarget(out var _BGME))
-			{
-				_logger.WriteLine($"Something in BGME shit its pants! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
-				return;
+            if (BGMEController == null || !BGMEController.TryGetTarget(out var _BGME))
+            {
+                _logger.WriteLine($"Something in BGME shit its pants! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
+                return;
             }
 
 */
@@ -98,31 +99,64 @@ namespace ProtagSumiConfig
 
             // criFS
             if (_configuration.EventEdits1)
-			{
-				criFsApi.AddProbingPath("OptionalModFiles\\Events"); // folder path. place a subfolder inside and then start your file path. for example: "(mod folder)\Test\(any name)\..."
-			}
+            {
+                criFsApi.AddProbingPath("OptionalModFiles\\Events\\Fixes");
+            }
+
+            if (_configuration.EventEditsBig)
+            {
+                criFsApi.AddProbingPath("OptionalModFiles\\Events\\LargeEdits");
+                var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Events", "LargeEdits", "Characters", "Joker", "1");
+
+                if (Directory.Exists(assetFolder))
+                {
+                    foreach (var file in Directory.EnumerateFiles(assetFolder, "*", SearchOption.AllDirectories))
+                    {
+                        var relativePath = Path.GetRelativePath(assetFolder, file);
+                        criFsApi.AddBind(file, relativePath, _modConfig.ModId);
+                    }
+                }
+                else
+                {
+                    _logger.WriteLine($"Character asset folder not found: {assetFolder}", System.Drawing.Color.Yellow);
+                }
+            }
 
             // criFS
             if (_configuration.Bustup1)
             {
-                criFsApi.AddProbingPath("OptionalModFiles\\Bustup\\L7M3"); // folder path. place a subfolder inside and then start your file path. for example: "(mod folder)\Test\(any name)\..."
+                var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Bustup", "L7M3", "Characters", "Joker", "1");
+
+                if (Directory.Exists(assetFolder))
+                {
+                    foreach (var file in Directory.EnumerateFiles(assetFolder, "*", SearchOption.AllDirectories))
+                    {
+                        var relativePath = Path.GetRelativePath(assetFolder, file);
+                        criFsApi.AddBind(file, relativePath, _modConfig.ModId);
+                    }
+                }
+                else
+                {
+                    _logger.WriteLine($"Character asset folder not found: {assetFolder}", System.Drawing.Color.Yellow);
+                }
             }
+
         }
-	
-		#region Standard Overrides
-	public override void ConfigurationUpdated(Config configuration)
-	{
-		// Apply settings from configuration.
-		// ... your code here.
-		_configuration = configuration;
-		_logger.WriteLine($"[{_modConfig.ModId}] Config Updated: Applying");
-	}
-	#endregion
-	
-		#region For Exports, Serialization etc.
+
+        #region Standard Overrides
+        public override void ConfigurationUpdated(Config configuration)
+    {
+        // Apply settings from configuration.
+        // ... your code here.
+        _configuration = configuration;
+        _logger.WriteLine($"[{_modConfig.ModId}] Config Updated: Applying");
+    }
+    #endregion
+    
+        #region For Exports, Serialization etc.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-	public Mod() { }
+    public Mod() { }
 #pragma warning restore CS8618
-	#endregion
-	}
+    #endregion
+    }
 }

@@ -30,16 +30,22 @@ namespace ProtagSumiConfig.Configuration
         */
 
         [Category("Events")]
-        [DisplayName("Event Edits")]
-		[Description("Disable this if you're having issues with other mods that edit events.")]
+        [DisplayName("Event Fixes")]
+		[Description("Tweaks various events to fix issues with protag Sumi. Disable this if you're having issues with other mods that edit events.")]
 		[DefaultValue(true)]
 		public bool EventEdits1 { get; set; } = true; // bool used in Mod.CS, not the folder name, but the bool name
+
+        [Category("Events")]
+        [DisplayName("Event Additions")]
+        [Description("Contains major edits to select events. Disable this if you're having issues with other mods that edit events.")]
+        [DefaultValue(true)]
+        public bool EventEditsBig { get; set; } = true;
 
         [Category("Bustup")]
         [DisplayName("L7M3's Bustups")]
         [Description("Enable this to use L7M3's custom drawn bustups.")]
-        [DefaultValue(true)]
-        public bool Bustup1 { get; set; } = true;
+        [DefaultValue(false)]
+        public bool Bustup1 { get; set; } = false;
     }
 
     /// <summary>
