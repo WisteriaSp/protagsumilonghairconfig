@@ -2,7 +2,7 @@
   "ModId": "p5rpc.kasumiasprotag",
   "ModName": "Kasumi as Protagonist - Test Build",
   "ModAuthor": "Wisteria",
-  "ModVersion": "0.9.7",
+  "ModVersion": "0.9.8",
   "ModDescription": "BETA 0.9 - A mod that replaces Joker with Kasumi. NOTE: Please install Costume Framework and use the configure button to set Joker\u0027s character slot to 1.",
   "ModDll": "ProtagSumiConfig.dll",
   "ModIcon": "protag2.png",
@@ -197,6 +197,7 @@
     "reloaded.sharedlib.hooks",
     "reloaded.universal.fileemulationframework.bf",
     "reloaded.universal.fileemulationframework.bmd",
+    "reloaded.universal.fileemulationframework.pak",
     "Ryo.Reloaded"
   ],
   "OptionalDependencies": [],

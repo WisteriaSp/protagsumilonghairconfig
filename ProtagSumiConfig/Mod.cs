@@ -8,6 +8,7 @@ using Reloaded.Mod.Interfaces.Internal;
 using P5R.CostumeFramework;
 using BF.File.Emulator.Interfaces;
 using BMD.File.Emulator.Interfaces;
+using PAK.Stream.Emulator.Interfaces;
 
 namespace ProtagSumiConfig
 {
@@ -82,21 +83,21 @@ namespace ProtagSumiConfig
                 return;
             }
 
-            var BMDEmulatorController = _modLoader.GetController<IBmdEmulator>();
-            if (BMDEmulatorController == null || !BMDEmulatorController.TryGetTarget(out var _BMDEmulator))
+            var BmdEmulatorController = _modLoader.GetController<IBmdEmulator>();
+            if (BmdEmulatorController == null || !BmdEmulatorController.TryGetTarget(out var _BmdEmulator))
             {
                 _logger.WriteLine($"Something in BMD Emulator broke! Files requiring msg merging will not load properly!", System.Drawing.Color.Red);
                 return;
             }
 
-            /*            var PakEmulatorController = _modLoader.GetController<IPakEmulator>();
+            var PakEmulatorController = _modLoader.GetController<IPakEmulator>();
                         if (PakEmulatorController == null || !PakEmulatorController.TryGetTarget(out var _PakEmulator))
                         {
-                            _logger.WriteLine($"Something in PAK Emulator shit its pants! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
+                            _logger.WriteLine($"Something in PAK Emulator broke! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
                             return;
                         }
 
-                        var BGMEController = _modLoader.GetController<IBgmeApi>();
+            /*                        var BGMEController = _modLoader.GetController<IBgmeApi>();
                         if (BGMEController == null || !BGMEController.TryGetTarget(out var _BGME))
                         {
                             _logger.WriteLine($"Something in BGME shit its pants! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
@@ -110,7 +111,6 @@ namespace ProtagSumiConfig
             var mods = _modLoader.GetActiveMods();
 
             var isRoseAndVioletActive = mods.Any(x => x.Generic.ModId == "p5rpc.kasumi.roseandviolet");
-            _logger.WriteLine($"Is Rose and Violet Active? {isRoseAndVioletActive}", System.Drawing.Color.Magenta);
 
 
             if (isRoseAndVioletActive)
@@ -227,6 +227,7 @@ namespace ProtagSumiConfig
             {
                 criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Flowscript", "Bath"));
                 _BfEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Flowscript", "Bath", "BF"));
+                _BmdEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Flowscript", "Bath", "BMD"));
             }
 
             // Women's Bath House Event
@@ -240,6 +241,61 @@ namespace ProtagSumiConfig
             {
                 criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Flowscript", "Restroom"));
                 _BfEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Flowscript", "Restroom", "BF"));
+            }
+
+            // Equipment Config
+            if (_configuration.Equipment)
+            {
+                criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Equipment"));
+                _PakEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Equipment", "FEmulator", "PAK"));
+            }
+
+            // Persona Swap Config
+            if (_configuration.PersonasMod == Config.CendrillonMod.DefaultCendrillon ||
+                _configuration.PersonasMod == Config.CendrillonMod.RedCendrillon)
+            {
+
+                criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Personas"));
+                _PakEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Personas", "FEmulator", "PAK"));
+
+                string? cendrillonFolder = _configuration.PersonasMod switch
+                {
+                    Config.CendrillonMod.DefaultCendrillon => "Cendrillon",
+                    Config.CendrillonMod.RedCendrillon => "CurseCendrillon",
+                    _ => null
+                };
+
+                if (!string.IsNullOrEmpty(cendrillonFolder))
+                {
+                    criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Gameplay", cendrillonFolder));
+                }
+            }
+
+
+            // Skillset Config
+            if (_configuration.Skillset)
+            {
+                criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Skillset"));
+                _PakEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Skillset", "FEmulator", "PAK"));
+            }
+
+            // OneCalledJay Bustup
+            if (_configuration.BustupJ)
+            {
+                var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Bustup", "OneCalledJay", "Characters", "Joker", "1");
+
+                if (Directory.Exists(assetFolder))
+                {
+                    foreach (var file in Directory.EnumerateFiles(assetFolder, "*", SearchOption.AllDirectories))
+                    {
+                        var relativePath = Path.GetRelativePath(assetFolder, file);
+                        criFsApi.AddBind(file, relativePath, _modConfig.ModId);
+                    }
+                }
+                else
+                {
+                    _logger.WriteLine($"Character asset folder not found: {assetFolder}", System.Drawing.Color.Yellow);
+                }
             }
 
             // criFS Bustup
