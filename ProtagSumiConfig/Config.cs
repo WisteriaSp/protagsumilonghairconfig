@@ -32,108 +32,204 @@ namespace ProtagSumiConfig.Configuration
         public enum CendrillonMod
         {
             Disabled,
+
+            [Display(Name = "Default Cendrillon")]
             DefaultCendrillon,
+
+            [Display(Name = "Red Cendrillon")]
             RedCendrillon,
+        }
+
+        public enum WeaponRangedEnum
+        {
+            [Display(Name = "Lever Action")]
+            LeverAction,
+
+            [Display(Name = "Pistol")]
+            Pistol,
+        }
+
+        public enum MeleeRangedEnum
+        {
+            [Display(Name = "Rapier")]
+            Rapier,
+
+            [Display(Name = "Dagger")]
+            Dagger,
+        }
+
+        public enum TracksuitEnum
+        {
+            [Display(Name = "Disabled")]
+            Default,
+
+            [Display(Name = "Black Tracksuit")]
+            BlackTracksuit,
+
+            [Display(Name = "Concept Art Tracksuit")]
+            ConceptArt,
+        }
+
+        public enum AoAArtEnum
+        {
+            [Display(Name = "Disabled")]
+            Default,
+
+            [Display(Name = "Enabled")]
+            Enabled,
+
+            [Display(Name = "Enabled + Smug")]
+            Smug,
+        }
+
+        public enum BustupSelection
+        {
+            Default,
+            L7M3,
+            OnedCalledJay,
         }
 
 
         [Category("Bustup")]
-        [DisplayName("L7M3's Bustups")]
-        [Description("Enable this to use L7M3's custom drawn bustups.")]
-        [DefaultValue(false)]
+        [DisplayName("Bustups")]
+        [Description("Select your preferred dialogue bustups.")]
+        [DefaultValue(BustupSelection.Default)]
         [Display(Order = 1)]
-        public bool Bustup1 { get; set; } = false;
+        public BustupSelection Bustup1 { get; set; }
 
-        [Category("Bustup")]
-        [DisplayName("OneCalledJay's Bustups")]
-        [Description("Enable this to use OneCalledJay's custom bustups.")]
-        [DefaultValue(false)]
+        [Category("Misc")]
+        [DisplayName("Opening Movie")]
+        [Description("Changes the Opening Movie to a Kasumi version of Wake Up Get Up Get Out There (By Arbiter).")]
+        [DefaultValue(true)]
         [Display(Order = 2)]
-        public bool BustupJ { get; set; } = false;
+        public bool OpeningMovie { get; set; } = true;
+
+        [Category("Misc")]
+        [DisplayName("Added Thieves Den Art")]
+        [Description("Adds new art to the Thieves Den based on this mod!")]
+        [DefaultValue(true)]
+        [Display(Order = 3)]
+        public bool ThievesDenAddon { get; set; } = true;
+
+        [Category("Misc")]
+        [DisplayName("Mini Boss Music")]
+        [Description("Placeholder")]
+        [DefaultValue(true)]
+        [Display(Order = 4)]
+        public bool MiniBossMusic { get; set; } = true;
+
+        [Category("Misc")]
+        [DisplayName("No All-Out-Attack Portrait")]
+        [Description("Removes the All-Out-Attack finisher art. By lyncpk")]
+        [DefaultValue(AoAArtEnum.Default)]
+        [Display(Order = 5)]
+        public AoAArtEnum AoAArt { get; set; }
 
         [Category("Gameplay")]
         [DisplayName("Equipment Patch")]
         [Description("Modifies Joker's equipment to better suit Violet. (By HappyGrinch08)")]
         [DefaultValue(false)]
-        [Display(Order = 3)]
+        [Display(Order = 6)]
         public bool Equipment { get; set; } = false;
 
         [Category("Gameplay")]
         [DisplayName("Violet's Personas")]
         [Description("Swaps Arsene, Raoul, and Satanael to use Cendrillon, Vanadis, and Ella. (By xJustAdam)")]
         [DefaultValue(CendrillonMod.Disabled)]
-        [Display(Order = 4)]
+        [Display(Order = 7)]
         public CendrillonMod PersonasMod { get; set; }
 
         [Category("Gameplay")]
         [DisplayName("Persona Skillsets")]
         [Description("Modifies affinities, stats, and skillsets to match Cendrillon/Vanadis. Recommended to use with Violet's Personas (by HappyGrinch08)")]
         [DefaultValue(false)]
-        [Display(Order = 5)]
+        [Display(Order = 8)]
         public bool Skillset { get; set; } = false;
 
         [Category("Model")]
         [DisplayName("Alternate Metaverse Run Animation")]
         [Description("Replaces the metaverse run animation with her field running animation, similar to lpspectrum's mod.")]
         [DefaultValue(false)]
-        [Display(Order = 6)]
+        [Display(Order = 9)]
         public bool AltMetaRun { get; set; } = false;
+
+        [Category("Model")]
+        [DisplayName("Costumes")]
+        [Description("Enables costumes. Keep this option ENABLED unless it's causing issues.")]
+        [DefaultValue(true)]
+        [Display(Order = 10)]
+        public bool CostumeSupport { get; set; } = true;
 
         [Category("Model")]
         [DisplayName("Undarkened Face")]
         [Description("Removes the face darkening when summoning a persona. Meant to be used with the No Darkened Faces mod, disable if you'd like.")]
         [DefaultValue(true)]
-        [Display(Order = 7)]
+        [Display(Order = 11)]
         public bool DarkenedFace { get; set; } = true;
 
         [Category("Model")]
         [DisplayName("Blue Dress over Winter Casual")]
         [Description("Replaces the winter casual outfit with the blue dress outfit from Kasumi's SL.")]
         [DefaultValue(false)]
-        [Display(Order = 8)]
+        [Display(Order = 13)]
         public bool BlueDress { get; set; } = false;
 
         [Category("Model")]
-        [DisplayName("Recolored Black Tracksuit")]
-        [Description("Replaces the gold and black workout outfit with a recolored Shujin Academy tracksuit outfit.")]
-        [DefaultValue(false)]
-        [Display(Order = 9)]
-        public bool BlackTracksuit { get; set; } = false;
+        [DisplayName("Recolored Tracksuit")]
+        [Description("Replaces the gold workout outfit with a recolored Shujin Academy tracksuit outfit or a recolor by MyTamagos based on concept art.")]
+        [DefaultValue(TracksuitEnum.Default)]
+        [Display(Order = 14)]
+        public TracksuitEnum TracksuitSelection { get; set; }
+
+        [Category("Model")]
+        [DisplayName("Ranged Weapon")]
+        [Description("Choose between Violet's lever action gun or Joker's pistols.")]
+        [DefaultValue(WeaponRangedEnum.LeverAction)]
+        [Display(Order = 15)]
+        public WeaponRangedEnum WeaponRanged { get; set; }
+
+        [Category("Model")]
+        [DisplayName("Ranged Weapon")]
+        [Description("Choose between Violet's rapier or Joker's daggers.")]
+        [DefaultValue(MeleeRangedEnum.Rapier)]
+        [Display(Order = 16)]
+        public MeleeRangedEnum MeleeRanged { get; set; }
 
         [Category("Flowscript and BMD")]
         [DisplayName("Women's Bath House")]
         [Description("Contains flowscript and msg edits to make the Yongen-Jaya Bath House women's only.")]
         [DefaultValue(true)]
-        [Display(Order = 10)]
+        [Display(Order = 17)]
         public bool Bathhouse { get; set; } = true;
 
         [Category("Flowscript and BMD")]
         [DisplayName("Enterable Women's Bathroom")]
         [Description("Allows you to enter the women's bathroom at Shujin Academy.")]
         [DefaultValue(true)]
-        [Display(Order = 11)]
+        [Display(Order = 18)]
         public bool Restroom { get; set; } = true;
 
         [Category("Events")]
         [DisplayName("Event Fixes")]
 		[Description("Tweaks various events to fix issues with protag Sumi. Disable this if you're having issues with other mods that edit events.")]
 		[DefaultValue(true)]
-        [Display(Order = 12)]
+        [Display(Order = 19)]
         public bool EventEdits1 { get; set; } = true; // bool used in Mod.CS, not the folder name, but the bool name
 
         [Category("Events")]
         [DisplayName("Event Additions")]
         [Description("Contains major edits to select events. Disable this if you're having issues with other mods that edit events.")]
         [DefaultValue(true)]
-        [Display(Order = 13)]
+        [Display(Order = 20)]
         public bool EventEditsBig { get; set; } = true;
 
         [Category("Events")]
         [DisplayName("Women's Bath House Event")]
         [Description("Contains event edits needed for the Bath House activity. Disable if causing issues or if the flowscript config is disabled.")]
         [DefaultValue(true)]
-        [Display(Order = 14)]
+        [Display(Order = 21)]
         public bool BathActivity { get; set; } = true; // bool used in Mod.CS, not the folder name, but the bool name
+
     }
 
     /// <summary>

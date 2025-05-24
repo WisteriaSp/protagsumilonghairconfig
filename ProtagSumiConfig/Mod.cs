@@ -9,6 +9,8 @@ using P5R.CostumeFramework;
 using BF.File.Emulator.Interfaces;
 using BMD.File.Emulator.Interfaces;
 using PAK.Stream.Emulator.Interfaces;
+using P5R.CostumeFramework.Interfaces;
+using Ryo.Interfaces;
 
 namespace ProtagSumiConfig
 {
@@ -91,11 +93,25 @@ namespace ProtagSumiConfig
             }
 
             var PakEmulatorController = _modLoader.GetController<IPakEmulator>();
-                        if (PakEmulatorController == null || !PakEmulatorController.TryGetTarget(out var _PakEmulator))
-                        {
-                            _logger.WriteLine($"Something in PAK Emulator broke! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
-                            return;
-                        }
+            if (PakEmulatorController == null || !PakEmulatorController.TryGetTarget(out var _PakEmulator))
+            {
+                _logger.WriteLine($"Something in PAK Emulator broke! Files requiring bin merging will not load properly!", System.Drawing.Color.Red);
+                return;
+            }
+
+            var CostumeFrameworkController = _modLoader.GetController<ICostumeApi>();
+            if (CostumeFrameworkController == null || !CostumeFrameworkController.TryGetTarget(out var CostumeFrameworkAPI))
+            {
+                _logger.WriteLine($"Something in Costume Framework broke! Costumes will not load properly!", System.Drawing.Color.Red);
+                return;
+            }
+
+            var RyoController = _modLoader.GetController<IRyoApi>();
+            if (RyoController == null || !RyoController.TryGetTarget(out var ryo))
+            {
+                _logger.WriteLine($"Something in Ryo broke! Audio configs will not load!", System.Drawing.Color.Red);
+                return;
+            }
 
             /*                        var BGMEController = _modLoader.GetController<IBgmeApi>();
                         if (BGMEController == null || !BGMEController.TryGetTarget(out var _BGME))
@@ -109,8 +125,8 @@ namespace ProtagSumiConfig
 
             // criFS
             var mods = _modLoader.GetActiveMods();
-
             var isRoseAndVioletActive = mods.Any(x => x.Generic.ModId == "p5rpc.kasumi.roseandviolet");
+            var isCBTActive = mods.Any(x => x.Generic.ModId == "p5r.enhance.cbt");
 
 
             if (isRoseAndVioletActive)
@@ -129,6 +145,8 @@ namespace ProtagSumiConfig
             else if (_configuration.EventEditsBig)
             {
                 criFsApi.AddProbingPath("OptionalModFiles\\Events\\LargeEdits");
+                _BfEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Events", "LargeEdits", "BF"));
+                _BmdEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Events", "LargeEdits", "BMD"));
                 var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Events", "LargeEdits", "Characters", "Joker", "1");
 
                 if (Directory.Exists(assetFolder))
@@ -139,12 +157,23 @@ namespace ProtagSumiConfig
                         criFsApi.AddBind(file, relativePath, _modConfig.ModId);
                     }
                 }
-                else
-                {
-                    _logger.WriteLine($"Character asset folder not found: {assetFolder}", System.Drawing.Color.Yellow);
-                }
             }
 
+
+            // Better Dungeon Exit Model
+            if (isCBTActive)
+            {
+                var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Model", "CBT", "BetterExitMaterials", "Characters", "Joker", "1");
+
+                if (Directory.Exists(assetFolder))
+                {
+                    foreach (var file in Directory.EnumerateFiles(assetFolder, "*", SearchOption.AllDirectories))
+                    {
+                        var relativePath = Path.GetRelativePath(assetFolder, file);
+                        criFsApi.AddBind(file, relativePath, _modConfig.ModId);
+                    }
+                }
+            }
 
             // Darkened Face
             if (_configuration.DarkenedFace)
@@ -158,10 +187,6 @@ namespace ProtagSumiConfig
                         var relativePath = Path.GetRelativePath(assetFolder, file);
                         criFsApi.AddBind(file, relativePath, _modConfig.ModId);
                     }
-                }
-                else
-                {
-                    _logger.WriteLine($"Character asset folder not found: {assetFolder}", System.Drawing.Color.Yellow);
                 }
             }
 
@@ -185,21 +210,28 @@ namespace ProtagSumiConfig
             }
 
             // Black Tracksuit
-            if (_configuration.BlackTracksuit)
+            if (_configuration.TracksuitSelection == Config.TracksuitEnum.BlackTracksuit ||
+                _configuration.TracksuitSelection == Config.TracksuitEnum.ConceptArt)
             {
-                var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Model", "OldTracksuit", "Characters", "Joker", "1");
+                string? TracksuitFolder = _configuration.TracksuitSelection switch
+                {
+                    Config.TracksuitEnum.BlackTracksuit => "OldTracksuit",
+                    Config.TracksuitEnum.ConceptArt => "TracksuitConceptArt",
+                    _ => null
+                };
 
-                if (Directory.Exists(assetFolder))
+                if (!string.IsNullOrEmpty(TracksuitFolder))
                 {
-                    foreach (var file in Directory.EnumerateFiles(assetFolder, "*", SearchOption.AllDirectories))
+                    var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Model", TracksuitFolder, "Characters", "Joker", "1");
+
+                    if (Directory.Exists(assetFolder))
                     {
-                        var relativePath = Path.GetRelativePath(assetFolder, file);
-                        criFsApi.AddBind(file, relativePath, _modConfig.ModId);
+                        foreach (var file in Directory.EnumerateFiles(assetFolder, "*", SearchOption.AllDirectories))
+                        {
+                            var relativePath = Path.GetRelativePath(assetFolder, file);
+                            criFsApi.AddBind(file, relativePath, _modConfig.ModId);
+                        }
                     }
-                }
-                else
-                {
-                    _logger.WriteLine($"Character asset folder not found: {assetFolder}", System.Drawing.Color.Yellow);
                 }
             }
 
@@ -230,6 +262,15 @@ namespace ProtagSumiConfig
                 _BmdEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Flowscript", "Bath", "BMD"));
             }
 
+            // Thieves Den
+            if (_configuration.ThievesDenAddon)
+            {
+                criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Misc", "ThievesDen"));
+                _BfEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Misc", "ThievesDen", "BF"));
+                _BmdEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Misc", "ThievesDen", "BMD"));
+                _PakEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Misc", "ThievesDen", "PAK"));
+            }
+
             // Women's Bath House Event
             if (_configuration.BathActivity)
             {
@@ -257,6 +298,7 @@ namespace ProtagSumiConfig
 
                 criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Personas"));
                 _PakEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Personas", "FEmulator", "PAK"));
+                _BmdEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Personas", "FEmulator", "BMD"));
 
                 string? cendrillonFolder = _configuration.PersonasMod switch
                 {
@@ -276,11 +318,49 @@ namespace ProtagSumiConfig
             if (_configuration.Skillset)
             {
                 criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Skillset"));
-                _PakEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Skillset", "FEmulator", "PAK"));
+                _BfEmulator.AddDirectory(Path.Combine(modDir, "OptionalModFiles", "Gameplay", "Skillset", "FEmulator", "BF"));
             }
 
+            // Opening Movie by Arbiter
+            if (_configuration.OpeningMovie)
+            {
+                criFsApi.AddProbingPath(Path.Combine(modDir, "OptionalModFiles", "Misc", "Movie"));
+            }
+
+
+            // NoAoAArt
+            if (_configuration.AoAArt == Config.AoAArtEnum.Enabled ||
+                _configuration.AoAArt == Config.AoAArtEnum.Smug)
+            {
+                List<string> aoaFolders = new();
+
+                if (_configuration.AoAArt == Config.AoAArtEnum.Enabled)
+                {
+                    aoaFolders.Add("NoAoAPortrait");
+                }
+                else if (_configuration.AoAArt == Config.AoAArtEnum.Smug)
+                {
+                    aoaFolders.AddRange(new[] { "NoAoAPortrait", "SmugAoA" });
+                }
+
+                foreach (var folder in aoaFolders)
+                {
+                    var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Model", folder, "Characters", "Joker", "1");
+
+                    if (Directory.Exists(assetFolder))
+                    {
+                        foreach (var file in Directory.EnumerateFiles(assetFolder, "*", SearchOption.AllDirectories))
+                        {
+                            var relativePath = Path.GetRelativePath(assetFolder, file);
+                            criFsApi.AddBind(file, relativePath, _modConfig.ModId);
+                        }
+                    }
+                }
+            }
+
+
             // OneCalledJay Bustup
-            if (_configuration.BustupJ)
+            if (_configuration.Bustup1 == Config.BustupSelection.OnedCalledJay)
             {
                 var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Bustup", "OneCalledJay", "Characters", "Joker", "1");
 
@@ -298,8 +378,52 @@ namespace ProtagSumiConfig
                 }
             }
 
+            // Weapon Ranged
+            if (_configuration.WeaponRanged == Config.WeaponRangedEnum.LeverAction)
+            {
+                var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Model", "Ranged", "Characters", "Joker", "1");
+
+                if (Directory.Exists(assetFolder))
+                {
+                    foreach (var file in Directory.EnumerateFiles(assetFolder, "*", SearchOption.AllDirectories))
+                    {
+                        var relativePath = Path.GetRelativePath(assetFolder, file);
+                        criFsApi.AddBind(file, relativePath, _modConfig.ModId);
+                    }
+                }
+            }
+
+            // Weapon Melee
+            if (_configuration.MeleeRanged == Config.MeleeRangedEnum.Rapier)
+            {
+                var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Model", "Melee", "Characters", "Joker", "1");
+
+                if (Directory.Exists(assetFolder))
+                {
+                    foreach (var file in Directory.EnumerateFiles(assetFolder, "*", SearchOption.AllDirectories))
+                    {
+                        var relativePath = Path.GetRelativePath(assetFolder, file);
+                        criFsApi.AddBind(file, relativePath, _modConfig.ModId);
+                    }
+                }
+            }
+
+            //Costumes
+            if (_configuration.CostumeSupport)
+            {
+                var CostumeFolder = Path.Combine(modDir, "OptionalModFiles", "CostumeSupport", "Costumes");
+                CostumeFrameworkAPI.AddCostumesFolder(modDir, CostumeFolder);
+            }
+
+            if (_configuration.MiniBossMusic)
+            {
+                var audioFolder = Path.Combine(modDir, "OptionalModFiles", "Audio", "MiniBoss1");
+                if (Directory.Exists(audioFolder))
+                    ryo.AddAudioPath(audioFolder, null);
+            }
+
             // criFS Bustup
-            if (_configuration.Bustup1)
+            if (_configuration.Bustup1 == Config.BustupSelection.L7M3)
             {
                 var assetFolder = Path.Combine(modDir, "OptionalModFiles", "Bustup", "L7M3", "Characters", "Joker", "1");
 
