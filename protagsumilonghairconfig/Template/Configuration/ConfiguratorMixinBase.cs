@@ -1,7 +1,7 @@
-﻿using ProtagSumiConfig.Configuration;
+﻿using protagsumilonghairconfig.Configuration;
 using Reloaded.Mod.Interfaces;
 
-namespace ProtagSumiConfig.Template.Configuration
+namespace protagsumilonghairconfig.Template.Configuration
 {
 	/// <summary>
 	/// Creates the various different configurations used by the mod.

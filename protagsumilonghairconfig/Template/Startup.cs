@@ -3,13 +3,13 @@
  * to make it easier to upgrade to newer versions of the template.
 */
 
-using ProtagSumiConfig.Configuration;
-using ProtagSumiConfig.Template.Configuration;
+using protagsumilonghairconfig.Configuration;
+using protagsumilonghairconfig.Template.Configuration;
 using Reloaded.Hooks.ReloadedII.Interfaces;
 using Reloaded.Mod.Interfaces;
 using Reloaded.Mod.Interfaces.Internal;
 
-namespace ProtagSumiConfig.Template
+namespace protagsumilonghairconfig.Template
 {
 	public class Startup : IMod
 	{

@@ -1,27 +1,64 @@
 {
-  "ModId": "p5rpc.kasumiasprotag",
-  "ModName": "Kasumi as Protagonist - Pre-Release Build",
-  "ModAuthor": "Wisteria",
-  "ModVersion": "0.9.9",
-  "ModDescription": "A visual-only mod that replaces Joker with Kasumi Yoshizawa. Be sure to check out Zyvlos\u0027s Rose \u0026 Violet Story Overhaul! \r\n\r\nNOTE: Please install Costume Framework and use the configure button to set Joker\u0027s character slot to 1.",
-  "ModDll": "ProtagSumiConfig.dll",
+  "ModId": "p5rpc.kasumiasprotag.longhair",
+  "ModName": "Kasumi as Protagonist - Long Hair Models",
+  "ModAuthor": "MyTamagos, Wisteria, Zylvos",
+  "ModVersion": "Pre-2-1.0.0",
+  "ModDescription": "Long hair models based on P5X\u0027s Kotone Montagne hair style. Includes menu art! Hair mesh created and rigged by MyTamagos. Special thanks to Zylvos for additional help.",
+  "ModDll": "protagsumilonghairconfig.dll",
   "ModIcon": "Preview.png",
-  "ModR2RManagedDll32": "x86/ProtagSumiConfig.dll",
-  "ModR2RManagedDll64": "x64/ProtagSumiConfig.dll",
+  "ModR2RManagedDll32": "x86/protagsumilonghairconfig.dll",
+  "ModR2RManagedDll64": "x64/protagsumilonghairconfig.dll",
   "ModNativeDll32": "",
   "ModNativeDll64": "",
   "Tags": [],
   "CanUnload": false,
   "HasExports": false,
   "IsLibrary": false,
-  "ReleaseMetadataFileName": "p5rpc.kasumiasprotag.ReleaseMetadata.json",
+  "ReleaseMetadataFileName": "p5rpc.kasumiasprotag.longhair.ReleaseMetadata.json",
   "PluginData": {
-    "GameBanana": {
-      "ItemType": "Wip",
-      "ItemId": 75092
+    "GameBananaDependencies": {
+      "IdToConfigMap": {
+        "p5r.enhance.cbt": {
+          "Config": {
+            "ItemType": "Mod",
+            "ItemId": 432481
+          },
+          "ReleaseMetadataName": "p5r.enhance.cbt.reloaded.ReleaseMetadata.json"
+        },
+        "p5rpc.kasumiasprotag": {
+          "Config": {
+            "ItemType": "Wip",
+            "ItemId": 75092
+          },
+          "ReleaseMetadataName": "p5rpc.kasumiasprotag.ReleaseMetadata.json"
+        },
+        "p5rpc.flowscriptframework": {
+          "Config": {
+            "ItemType": "Mod",
+            "ItemId": 510809
+          },
+          "ReleaseMetadataName": "p5rpc.flowscriptframework.ReleaseMetadata.json"
+        },
+        "p5rpc.patch.forcejokername": {
+          "Config": {
+            "ItemType": "mods",
+            "ItemId": 587965
+          },
+          "ReleaseMetadataName": "p5rpc.patch.forcejokername.ReleaseMetadata.json"
+        }
+      }
     },
     "GitHubDependencies": {
       "IdToConfigMap": {
+        "BGME.Framework": {
+          "Config": {
+            "UserName": "RyoTune",
+            "RepositoryName": "BGME",
+            "UseReleaseTag": false,
+            "AssetFileName": "Mod.zip"
+          },
+          "ReleaseMetadataName": "BGME.Framework.ReleaseMetadata.json"
+        },
         "crifs.v2.hook": {
           "Config": {
             "UserName": "Sewer56",
@@ -48,15 +85,6 @@
             "AssetFileName": "Mod.zip"
           },
           "ReleaseMetadataName": "p5rpc.modloader.ReleaseMetadata.json"
-        },
-        "reloaded.sharedlib.hooks": {
-          "Config": {
-            "UserName": "Sewer56",
-            "RepositoryName": "Reloaded.SharedLib.Hooks.ReloadedII",
-            "UseReleaseTag": true,
-            "AssetFileName": "reloaded.sharedlib.hooks.zip"
-          },
-          "ReleaseMetadataName": "Sewer56.Update.ReleaseMetadata.json"
         },
         "reloaded.universal.fileemulationframework.bf": {
           "Config": {
@@ -85,14 +113,14 @@
           },
           "ReleaseMetadataName": "PAK.Stream.Emulator.ReleaseMetadata.json"
         },
-        "Ryo.Reloaded": {
+        "BGME.Framework.API": {
           "Config": {
             "UserName": "RyoTune",
-            "RepositoryName": "Ryo",
+            "RepositoryName": "BGME",
             "UseReleaseTag": false,
             "AssetFileName": "Mod.zip"
           },
-          "ReleaseMetadataName": "Ryo.Reloaded.ReleaseMetadata.json"
+          "ReleaseMetadataName": "BGME.Framework.API.ReleaseMetadata.json"
         },
         "Reloaded.Memory.SigScan.ReloadedII": {
           "Config": {
@@ -103,23 +131,32 @@
           },
           "ReleaseMetadataName": "Reloaded.Memory.SigScan.ReloadedII.ReleaseMetadata.json"
         },
-        "BGME.Framework": {
+        "reloaded.sharedlib.hooks": {
           "Config": {
-            "UserName": "RyoTune",
-            "RepositoryName": "BGME",
-            "UseReleaseTag": false,
-            "AssetFileName": "Mod.zip"
+            "UserName": "Sewer56",
+            "RepositoryName": "Reloaded.SharedLib.Hooks.ReloadedII",
+            "UseReleaseTag": true,
+            "AssetFileName": "reloaded.sharedlib.hooks.zip"
           },
-          "ReleaseMetadataName": "BGME.Framework.ReleaseMetadata.json"
+          "ReleaseMetadataName": "Sewer56.Update.ReleaseMetadata.json"
         },
-        "BGME.Framework.API": {
+        "Ryo.Reloaded": {
           "Config": {
             "UserName": "RyoTune",
-            "RepositoryName": "BGME",
+            "RepositoryName": "Ryo",
             "UseReleaseTag": false,
             "AssetFileName": "Mod.zip"
           },
-          "ReleaseMetadataName": "BGME.Framework.API.ReleaseMetadata.json"
+          "ReleaseMetadataName": "Ryo.Reloaded.ReleaseMetadata.json"
+        },
+        "SharedScans.Reloaded": {
+          "Config": {
+            "UserName": "RyoTune",
+            "RepositoryName": "SharedScans",
+            "UseReleaseTag": false,
+            "AssetFileName": "Mod.zip"
+          },
+          "ReleaseMetadataName": "SharedScans.Reloaded.ReleaseMetadata.json"
         },
         "p5rpc.lib": {
           "Config": {
@@ -147,15 +184,6 @@
             "AssetFileName": "Mod.zip"
           },
           "ReleaseMetadataName": "BGME.BattleThemes.ReleaseMetadata.json"
-        },
-        "SharedScans.Reloaded": {
-          "Config": {
-            "UserName": "RyoTune",
-            "RepositoryName": "SharedScans",
-            "UseReleaseTag": false,
-            "AssetFileName": "Mod.zip"
-          },
-          "ReleaseMetadataName": "SharedScans.Reloaded.ReleaseMetadata.json"
         },
         "CriFs.V2.Hook.Awb": {
           "Config": {
@@ -210,28 +238,45 @@
             "AssetFileName": "Mod.zip"
           },
           "ReleaseMetadataName": "Reloaded.Universal.FileEmulationFramework.ReleaseMetadata.json"
+        },
+        "p5rpc.flowscriptframework": {
+          "Config": {
+            "UserName": "Secre-C",
+            "RepositoryName": "p5rpc.flowscriptframework",
+            "UseReleaseTag": true,
+            "AssetFileName": "Mod.zip"
+          },
+          "ReleaseMetadataName": "p5rpc.flowscriptframework.ReleaseMetadata.json"
+        },
+        "p5rpc.evt.fadeouttablemerge": {
+          "Config": {
+            "UserName": "DeathChaos25",
+            "RepositoryName": "p5rpc.evt.fadeouttablemerge",
+            "UseReleaseTag": true,
+            "AssetFileName": "Mod.zip"
+          },
+          "ReleaseMetadataName": "p5rpc.evt.fadeouttablemerge.ReleaseMetadata.json"
         }
       }
     }
   },
   "IsUniversalMod": false,
   "ModDependencies": [
+    "BGME.Framework",
     "crifs.v2.hook",
     "P5R.CostumeFramework",
     "p5r.enhance.cbt",
+    "p5rpc.kasumiasprotag",
     "p5rpc.modloader",
-    "p5rpc.patch.forcejokername",
-    "reloaded.sharedlib.hooks",
     "reloaded.universal.fileemulationframework.bf",
     "reloaded.universal.fileemulationframework.bmd",
-    "reloaded.universal.fileemulationframework.pak",
-    "Ryo.Reloaded"
+    "reloaded.universal.fileemulationframework.pak"
   ],
   "OptionalDependencies": [],
   "SupportedAppId": [
     "p5r.exe"
   ],
-  "ProjectUrl": "https://gamebanana.com/wips/75092",
+  "ProjectUrl": "",
   "CreatorUrl": "",
   "IsSeparator": false
 }

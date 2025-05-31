@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "protagsumiconfig", "ProtagSumiConfig\protagsumiconfig.csproj", "{6C3C2BE9-6123-4D3D-B00C-FEB50E64684C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "protagsumilonghairconfig", "protagsumilonghairconfig\protagsumilonghairconfig.csproj", "{6C3C2BE9-6123-4D3D-B00C-FEB50E64684C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{61D5F706-5C22-42C6-94D9-8E1E7A2120D5} = {61D5F706-5C22-42C6-94D9-8E1E7A2120D5}
 	EndProjectSection

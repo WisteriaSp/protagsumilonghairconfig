@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace ProtagSumiConfig.Template.Configuration
+namespace protagsumilonghairconfig.Template.Configuration
 {
 	public class Utilities
 	{

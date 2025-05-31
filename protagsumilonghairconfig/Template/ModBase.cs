@@ -1,6 +1,6 @@
-﻿using ProtagSumiConfig.Configuration;
+﻿using protagsumilonghairconfig.Configuration;
 
-namespace ProtagSumiConfig.Template
+namespace protagsumilonghairconfig.Template
 {
 	/// <summary>
 	/// Base class for implementing mod functionality.
