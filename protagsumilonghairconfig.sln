@@ -4,23 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "protagsumilonghairconfig", "protagsumilonghairconfig\protagsumilonghairconfig.csproj", "{6C3C2BE9-6123-4D3D-B00C-FEB50E64684C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{61D5F706-5C22-42C6-94D9-8E1E7A2120D5} = {61D5F706-5C22-42C6-94D9-8E1E7A2120D5}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CriFs.V2.Hook.Interfaces", "Interfaces\CriFs.V2.Hook.ReloadedII\Interfaces\CriFs.V2.Hook.Interfaces\CriFs.V2.Hook.Interfaces.csproj", "{3FD83D1F-3089-44D3-B6A6-4B63800D89C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BGME.Framework.Interfaces", "Interfaces\BGME\BGME.Framework.Interfaces\BGME.Framework.Interfaces.csproj", "{3A714CD7-B133-49B1-8324-9ECA9BED5AB5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BF.File.Emulator.Interfaces", "Interfaces\FileEmulationFramework\Emulator\Interfaces\BF.File.Emulator.Interfaces\BF.File.Emulator.Interfaces.csproj", "{0F88B5A2-5E91-40F3-9F4D-239E469D2A2D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BMD.File.Emulator.Interfaces", "Interfaces\FileEmulationFramework\Emulator\Interfaces\BMD.File.Emulator.Interfaces\BMD.File.Emulator.Interfaces.csproj", "{61D5F706-5C22-42C6-94D9-8E1E7A2120D5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PAK.Stream.Emulator.Interfaces", "Interfaces\FileEmulationFramework\Emulator\Interfaces\PAK.Stream.Emulator.Interfaces\PAK.Stream.Emulator.Interfaces.csproj", "{F9357C7D-0964-4CDF-B356-DFD64C02C179}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P5R.CostumeFramework.Interfaces", "M:\Drives\LDrive\Repos2\protagsumiaddonconfig\Interfaces\P5R.CostumeFramework\P5R.CostumeFramework.Interfaces\P5R.CostumeFramework.Interfaces.csproj", "{01E719C0-07E0-445B-A9AD-A506EDCB492B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ryo.Interfaces", "M:\Drives\LDrive\Repos2\kasumivoicelineconfig\Interfaces\Ryo\Ryo.Interfaces\Ryo.Interfaces.csproj", "{28B4E9FC-D218-43B1-AE8D-90A2A6A8CF8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,30 +23,10 @@ Global
 		{3FD83D1F-3089-44D3-B6A6-4B63800D89C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD83D1F-3089-44D3-B6A6-4B63800D89C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD83D1F-3089-44D3-B6A6-4B63800D89C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A714CD7-B133-49B1-8324-9ECA9BED5AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A714CD7-B133-49B1-8324-9ECA9BED5AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A714CD7-B133-49B1-8324-9ECA9BED5AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A714CD7-B133-49B1-8324-9ECA9BED5AB5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F88B5A2-5E91-40F3-9F4D-239E469D2A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F88B5A2-5E91-40F3-9F4D-239E469D2A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F88B5A2-5E91-40F3-9F4D-239E469D2A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F88B5A2-5E91-40F3-9F4D-239E469D2A2D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61D5F706-5C22-42C6-94D9-8E1E7A2120D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61D5F706-5C22-42C6-94D9-8E1E7A2120D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61D5F706-5C22-42C6-94D9-8E1E7A2120D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61D5F706-5C22-42C6-94D9-8E1E7A2120D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9357C7D-0964-4CDF-B356-DFD64C02C179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9357C7D-0964-4CDF-B356-DFD64C02C179}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9357C7D-0964-4CDF-B356-DFD64C02C179}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9357C7D-0964-4CDF-B356-DFD64C02C179}.Release|Any CPU.Build.0 = Release|Any CPU
 		{01E719C0-07E0-445B-A9AD-A506EDCB492B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{01E719C0-07E0-445B-A9AD-A506EDCB492B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01E719C0-07E0-445B-A9AD-A506EDCB492B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01E719C0-07E0-445B-A9AD-A506EDCB492B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{28B4E9FC-D218-43B1-AE8D-90A2A6A8CF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{28B4E9FC-D218-43B1-AE8D-90A2A6A8CF8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{28B4E9FC-D218-43B1-AE8D-90A2A6A8CF8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28B4E9FC-D218-43B1-AE8D-90A2A6A8CF8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
